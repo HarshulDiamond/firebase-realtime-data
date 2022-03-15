@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        label {
+            display: inline-block;
+            width: 80px
+        }
+
+        ;
+    </style>
+</head>
+
+<body>
+    <label>Name</label> <input id="Namebox" type="text">
+    <label>Rno</label> <input id="Rollbox" type="text">
+    <hr>
+
+    <button id="Insertbutton">Insert</button>
+    <button id="Deletebutton">Delete</button>
+
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        
+           const firebaseConfig = {
+                 apiKey: "AIzaSyDnogvTgCFhODW2gve8U10jORONC3mjdA0",
+                 authDomain: "fir-2-29bd9.firebaseapp.com",
+                 projectId: "fir-2-29bd9",
+                 storageBucket: "fir-2-29bd9.appspot.com",
+                 messagingSenderId: "528751861295",
+                 appId: "1:528751861295:web:517c27c1b67886860630da"
+  };
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        import { getDatabase, ref, set, child, update, remove }
+            from "https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js";
+
+        const db = getDatabase();
+
+        var namebox = document.getElementById("Namebox");
+        var rollbox = document.getElementById("Rollbox");
+
+        var insertbutton = document.getElementById("Insertbutton");
+        var delbutton = document.getElementById("Deletebutton");
+
+
+
+        const InsertData = () => {
+            set(ref(db, "TheStudent/" + rollbox.value), {
+                Nameofstd: namebox.value,
+                RollNo: rollbox.value
+
+            })
+                .then(() => {
+                    alert("Data stored successfully");
+
+                })
+                .catch((error) => {
+                    alert("Unsuccessful, error" + error);
+                });
+
+        }
+
+        insertbutton.addEventListener('click', InsertData);
+    </script>
+
+
+</body>
+
+</html>
